@@ -1,0 +1,41 @@
+{
+    "index_patterns": [
+        "suricata-*",
+        "zeek-*"
+    ],
+    "settings": {
+        "number_of_shards": 1,
+        "number_of_replicas": 0,
+        "refresh_interval": "5s",
+        "index.max_docvalue_fields_search": "200",
+        "index.mapping.ignore_malformed": true
+    },
+    "mappings": {
+        "dynamic_templates": [
+            {
+                "strings_as_keywords": {
+                    "match_mapping_type": "string",
+                    "mapping": {
+                        "type": "text",
+                        "norms": false,
+                        "fields": {
+                            "raw": {
+                                "type": "keyword",
+                                "ignore_above": 256
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "unindexed_doubles": {
+                    "match_mapping_type": "double",
+                    "mapping": {
+                        "type": "float",
+                        "index": false
+                    }
+                }
+            }
+        ]
+    }
+}

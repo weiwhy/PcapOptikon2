@@ -1,0 +1,6 @@
+*.pcap
+*.log
+*.zip
+*.exe
+suricata.rules
+eve.json
