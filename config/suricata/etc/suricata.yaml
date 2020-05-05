@@ -52,7 +52,7 @@ default-log-dir: /var/log/suricata/
 
 # global stats configuration
 stats:
-  enabled: yes
+  enabled: no
   # The interval field (in seconds) controls at what interval
   # the loggers are invoked.
   interval: 300
@@ -111,10 +111,10 @@ outputs:
             payload-printable: yes
             http-body: yes
             http-body-printable: yes
-        - stats:
-            totals: yes       # stats for all threads merged together
-            threads: yes       # per thread stats
-            deltas: yes        # include delta values
+        #- stats:
+        #    totals: yes       # stats for all threads merged together
+        #    threads: yes       # per thread stats
+        #    deltas: yes        # include delta values
 
   - unified2-alert:
       enabled: no

@@ -2,5 +2,5 @@
 *.log
 *.zip
 *.exe
-suricata.rules
+*.rules
 eve.json
