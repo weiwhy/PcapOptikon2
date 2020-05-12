@@ -32,7 +32,6 @@ services:
             - ./config/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
             - ./logs/suricata:/var/log/suricata:ro
             - ./logs/zeek:/var/log/zeek/current:ro
-    
 
     kibana:
         container_name: pcapopt_kibana

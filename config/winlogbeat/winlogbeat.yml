@@ -1,0 +1,8 @@
+winlogbeat.event_logs:
+  - name: /var/log/event_logs/*.evtx
+    no_more_events: stop 
+
+winlogbeat.shutdown_timeout: 10s
+
+output.elasticsearch:
+  hosts: 'elasticsearch:9200'

@@ -1,5 +1,5 @@
 # PcapOptikon2
-PCAPOptikon is a project that will provide an easy way to analyze pcap using the latest version of Suricata and Zeek.
+PcapOptikon is a project that will provide an easy way to analyze pcap using the latest version of Suricata and Zeek.
 It can also save Suricata and Zeek logs in Elasticsearch using the new Elasticsearch Common Schema or the original field names.
 
 # Install & Uninstall
@@ -83,6 +83,22 @@ If you prefer using the command line (because [reasons](https://giphy.com/gifs/Y
 If you don't want to waste time starting filebeat/elasticsearch/kibana go to `./zeek/site/local.zeek` and comment out the first line (`@load policy/tuning/json-logs.zeek`). Then start analyzing a new pcap and enjoy plaintext, tab separated zeek logs. `awk` all the way, baby!
 
 Even if you'd like to use directly the log file I suggest to keep them in `.json` format and use `jq` utility to query them. You can read a pretty good `jq` primer [here](https://www.gibiansky.com/blog/command-line/jq-primer/index.html)
+
+## Import Windows Event logs
+[BETA]
+It's possible to import `.evtx` files in elasticsearch on index `windows_events` using the following command:
+First be sure to have elasticsearch up and running:
+```
+sudo docker-compose elasticsearch kibana
+```
+
+Then place every `.evtx` you want to import inside the folder `import_event_logs` and run the following command:
+```
+sudo ./import_event_logs.sh
+```
+
+Now you can find the Event logs in `windows_events` index
+[Todo screenshots]
 
 ## Using Elastic Common Schema
 If you would like like to use ECS (elastic common schema) to process your Zeek and Suricata logs you should use the `docker-compose-ecs.yaml`
