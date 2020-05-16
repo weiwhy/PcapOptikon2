@@ -3,4 +3,5 @@
 *.zip
 *.exe
 *.rules
+*.evtx
 eve.json
