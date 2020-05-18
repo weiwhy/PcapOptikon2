@@ -80,10 +80,12 @@ sudo docker-compose up zeek suricata
 The containers will print the output on the console and exit when they finish processing the pcap.
 You can see the results on Kibana: http://localhost:5601
 
-If it's the first time opening Kibana it will prompt to the creation of a new index-pattern.
-You can do it from the following interface:
-[TODO screenshots]
+In Kibana there are two index patterns: `pcapoptikon*` and `pcapoptikon_original_ts*` you can select those from the drop down menu:
 
+![Kibana index pattern dropdown](https://github.com/certego/PcapOptikon2/raw/master/images/kibana_indexpattern_dropdown.png)
+
+You can see both zeek and suricata logs from these index patterns. `pcapoptikon*` uses as default timestamp field (`@timestamp`) the time when the logs were being saved in elasticsearch and you can find the original pcap timestamp inside the `timestamp` field. `pcapotikon_original_ts*` uses the original pcap time as default timestamp so you can see the real timeline. Kibana, by default, shows the last 15 minuts of data, so if you are analyzing old pcaps remember to widens the search timewindows using the menu on the top right of the page.
+ 
 ## Zeek Extracted Files
 
 The file extraction plugin is automatically loaded in Zeek and the extracted files can be found in `./zeek/extracted_files`. The plugin configuration is in this file `./config/zeek/site/file-extraction/config.zeek`. You can add additional filetypes in the following file:
