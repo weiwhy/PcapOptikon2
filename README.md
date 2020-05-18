@@ -37,7 +37,21 @@ pcapopt_logstash        /usr/local/bin/docker-entr ...   Up
 pcapopt_kibana          /usr/local/bin/dumb-init - ...   Up (health: starting)   127.0.0.1:5601->5601/tcp
 ```
 
-To stop everything run:
+Kibana and elasticsearch could take a couple of minutes to start. You can monitor the progress by doing `docker-compose ps` and waiting for `starting` to go away.
+When everything is up and runnning you can go to http://localhost:5601 to open Kibana web interface.
+At the first access you should see the following screen:
+![Kibana first access](https://github.com/certego/PcapOptikon2/raw/master/images/kibana_first_access.png)
+Click **"Explore on my own"** to close the window.
+
+Now we can import the panoptikon index patterns, they will be used to access our pcap data. To do so click the Managment icon (the cog):
+![Kibana cog](https://github.com/certego/PcapOptikon2/raw/master/images/kibana_managment.png)
+
+Than click "Saved object"
+![Saved Object](https://github.com/certego/PcapOptikon2/raw/master/images/kibana_saved_object.png)
+
+Than open the Import dialog and import `kibana.ndjson` file from this repository. Now going back in Kibana discover you should see two index pattern called `pcapoptikon*` and `pcapoptikon_original_ts`.
+
+When you are done to stop everything run:
 ```
 sudo docker-compose stop
 ```
