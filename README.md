@@ -103,6 +103,18 @@ Example: to add Microsoft Office file extraction add the following line to `./co
 ```
 You can find all supported file types in `.config/zeek/site/file-extraction/plugins`.
 
+## Clean data
+To clean logs on disk (everything on logs folder) run the following script:
+```
+(sudo) ./clean_logs.sh
+```
+`sudo` may be needed if you are running docker as root since the logs file are written by zeek and suricata containers.
+
+If you have analyzed the same pcap more than once (to test out suricata rules) it could be usefull to delete old data from elasticsearch. To do so you can open Kibana web interface and follow this path:
+```
+Managment -> Index Managment -> select `panoptikon_original_ts` -> click "manage index" -> delete index
+```
+
 # Advanced Usage
 
 ## Light weight usage: ditching elasticsearch (the hacker way)
