@@ -1,7 +1,6 @@
 {
     "index_patterns": [
-        "suricata*",
-        "zeek*"
+        "pcapoptikon*"
     ],
     "settings": {
         "number_of_shards": 1,
@@ -11,6 +10,14 @@
         "index.mapping.ignore_malformed": true
     },
     "mappings": {
+        "properties": {
+            "@timestamp": {
+                "type": "date"
+            },
+            "timestamp": {
+                "type": "date"
+            }
+        },
         "dynamic_templates": [
             {
                 "strings_as_keywords": {
