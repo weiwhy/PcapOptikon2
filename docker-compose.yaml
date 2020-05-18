@@ -85,14 +85,12 @@ services:
 
     zeek:
         container_name: pcapopt_zeek
-        image: certego/zeek:latest
+        image: certego/zeek:3.1.2
         hostname: zeek
         working_dir: /var/log/zeek
         entrypoint:
-            - zeek
-            - -C
-            - -r
-            - /pcap/test.pcap
+            - /process_pcap_folder.sh
+            - /pcap
             - local
             - "Site::local_nets += { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 }"
         volumes:

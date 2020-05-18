@@ -1,12 +1,14 @@
 # PcapOptikon2
 PcapOptikon is a project that will provide an easy way to analyze pcap using the latest version of Suricata and Zeek.
 It can also save Suricata and Zeek logs in Elasticsearch using the new Elasticsearch Common Schema or the original field names.
+PcapOptikon2 uses default docker container for most images and aims to be easy and straightforward to use.
 
-# Install & Uninstall
+# Install & uninstall
 Install Docker-CE and docker-compose:
 - https://docs.docker.com/install/linux/docker-ce/ubuntu/
 - https://docs.docker.com/compose/install/
 
+## Uninstall
 To Unistall and remove all files delete all containers with
 ```
 sudo docker-compose down -v
@@ -15,16 +17,7 @@ Than you can safely delete this repository
 
 # Basic Usage
 
-## Managing suricata Signatures
-Use the following command to download all ET rules:
-```
-sudo docker-compose run --entrypoint='suricata-update -f' suricata
-```
-This command will download the rules and create a rule file in `./config/suricata/rules/suricata.rules`.
-
-If you want to test custom rules add them in `./config/suricata/rules/custom.rules` file.
-
-## Start Elk stack
+## Start Elasticsearch stack
 
 To start Elasticsearch,logstash and Kibana run the following command
 ```
@@ -34,24 +27,32 @@ sudo docker-compose up -d elasticsearch logstash kibana
 Use the following command to check if everything is working properly:
 ```
 sudo docker-compose ps
+```
+The output should be the following:
+```
 Name                       Command                       State                    Ports          
 ---------------------------------------------------------------------------------------------------------
 pcapopt_elasticsearch   /usr/local/bin/docker-entr ...   Up (health: starting)   9200/tcp, 9300/tcp      
 pcapopt_logstash        /usr/local/bin/docker-entr ...   Up                                              
 pcapopt_kibana          /usr/local/bin/dumb-init - ...   Up (health: starting)   127.0.0.1:5601->5601/tcp
-pcapopt_suricata        suricata --runmode=single  ...   Exit 0                                          
-pcapopt_zeek            zeek -C -r /pcap/test.pcap ...   Exit 0
 ```
-
-Suricata and Zeek are ran only when analythig a pcap. It's correct their state is in `Exit 0`.
 
 To stop everything run:
 ```
 sudo docker-compose stop
 ```
+## Managing suricata Signatures
+Use the following command to download all Open ET rules:
+```
+sudo docker-compose run --entrypoint='suricata-update -f' suricata
+```
+This command will download the rules and create a rule file in `./config/suricata/rules/suricata.rules`.
+
+If you want to test custom rules add them in `./config/suricata/rules/custom.rules` file.
 
 ## Analyzing a PCAP
-Put a file named `test.pcap` inside the `pcap` folder. It's mandatory to call the file `test.pcap` because the filename is hardcoded in `docker-compose.yaml` (Fix for this issue is work in progress)
+Put one `pcap` file inside the `pcap` folder.
+**WARNING**: If you put more than one pcap file inside the folder Zeek will overwrites the outputfiles and you will see only the data from the last pcap. This is a bug we will fix, Suricata instead will run fine.
 
 Start zeek and suricata containers:
 ```
