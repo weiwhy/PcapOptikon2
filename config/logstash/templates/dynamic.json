@@ -16,6 +16,25 @@
             },
             "timestamp": {
                 "type": "date"
+            },
+            "tag": {
+                "type": "keyword"
+            },
+            "src_ip": {
+                "type": "ip"
+            },
+            "dst_ip": {
+                "type": "ip"
+            },
+            "id": {
+                "properties": {
+                    "origin_h": {
+                        "type": "ip"
+                    },
+                    "resp_h": {
+                        "type": "ip"
+                    }
+                }
             }
         },
         "dynamic_templates": [
