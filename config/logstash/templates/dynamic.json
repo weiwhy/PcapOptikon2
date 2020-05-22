@@ -17,13 +17,13 @@
             "timestamp": {
                 "type": "date"
             },
-            "tag": {
+            "tags": {
                 "type": "keyword"
             },
             "src_ip": {
                 "type": "ip"
             },
-            "dst_ip": {
+            "dest_ip": {
                 "type": "ip"
             },
             "id": {
