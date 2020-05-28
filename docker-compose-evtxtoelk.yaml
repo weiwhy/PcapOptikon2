@@ -12,7 +12,7 @@ services:
             - -s
             - "2000"
             - -i
-            - windows_events
+            - windows_events_original_ts
         depends_on:
             - elasticsearch
         volumes:

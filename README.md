@@ -125,8 +125,6 @@ If you don't want to waste time starting filebeat/elasticsearch/kibana go to `./
 Even if you'd like to use directly the log file I suggest to keep them in `.json` format and use `jq` utility to query them. You can read a pretty good `jq` primer [here](https://www.gibiansky.com/blog/command-line/jq-primer/index.html)
 
 ## Import Windows Event logs
-[BETA, but it's working]
-
 It's possible to import `.evtx` files in elasticsearch on index `windows_events` using the following command:
 First be sure to have elasticsearch up and running:
 ```
@@ -135,11 +133,14 @@ sudo docker-compose elasticsearch kibana
 
 Then place every `.evtx` you want to import inside the folder `import_event_logs` and run the following command:
 ```
+sudo docker-compose -f docker-compose.yaml -f docker-compose-evtxtoelk.yaml up evtxtoelk
+```
+Or you can use the following script that does the same:
+```
 sudo ./import_event_logs.sh
 ```
 
-Now you can find the Event logs in `windows_events` index
-[Todo screenshots]
+Now you can find the Event logs in `windows_events_original_ts` and in `windows_events`. Like suricata/zeek logs they are indexed by original timestamp of event and by ingestion timestamp
 
 ## Using Elastic Common Schema
 [BETA, not working right now]
