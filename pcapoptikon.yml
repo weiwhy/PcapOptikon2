@@ -1,4 +1,4 @@
-title: Elastic Winlogbeat (from 7.x) index pattern and field mapping
+title: Elastic evtx2elk index pattern and field mapping
 order: 20
 backends:
   - es-qs
