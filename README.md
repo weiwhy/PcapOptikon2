@@ -70,7 +70,7 @@ If you want to test custom rules add them in `./config/suricata/rules/custom.rul
 ## Analyzing a PCAP
 Put one `pcap` file inside the `pcap` folder.
 
-**WARNING**: If you put more than one pcap file inside the folder Zeek will overwrites the output files and you will see only the data from the last pcap. This is a bug we will fix, Suricata instead will run fine.
+**WARNING**: The files should have a `.pcap` extension, rename your files if they use `.pcapng` extension
 
 Start zeek and suricata containers:
 ```
