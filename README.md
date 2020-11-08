@@ -110,7 +110,7 @@ To clean logs on disk (everything on logs folder) run the following script:
 ```
 `sudo` may be needed if you are running docker as root since the logs file are written by zeek and suricata containers.
 
-If you have analyzed the same pcap more than once (to test out suricata rules) it could be usefull to delete old data from elasticsearch. To do so you can open Kibana web interface and follow this path:
+If you have analyzed the same pcap dozen of times (to test out suricata rules) it could be useful to delete old data from elasticsearch. To do so you can open Kibana web interface and follow this path:
 ```
 Managment -> Index Managment -> select `panoptikon_original_ts` -> click "manage index" -> delete index
 ```
@@ -143,24 +143,12 @@ sudo ./import_event_logs.sh
 Now you can find the Event logs in `windows_events_original_ts` and in `windows_events`. Like suricata/zeek logs they are indexed by original timestamp of event and by ingestion timestamp
 
 ## Using Elastic Common Schema
-[BETA, not working right now]
 
-If you would like like to use ECS (elastic common schema) to process your Zeek and Suricata logs you should use the `docker-compose-ecs.yaml`
-
-Be sure the default containers are stopped:
-```
-sudo docker-compose stop
-```
+If you would like like to use ECS (elastic common schema) to process your Zeek and Suricata logs you should launch also ``filebeat``
 
 Start the Elasticsearch with filebeat container:
 ```
-sudo docker-compose -f docker-compose-ecs.yaml up -d elasticsearch filebeat kibana
-```
-
-You can now analyze your pcap normally, remembering to put `-f docker-compose-ecs.yaml` before every command.
-Example:
-```
-sudo docker-compose -f docker-compose-ecs.yaml up zeek suricata
+sudo docker-compose up -d elasticsearch filebeat kibana
 ```
 
 You can see your logs in `filebeat-*` index on Elasticsearch:
